@@ -372,19 +372,7 @@ button:hover {
 
         <?php if (isset($_GET['success'])): ?>
             <div class="success-message">Спасибо за заполнение анкеты!</div>
-        try{
-            foreach ($_COOKIE as $name => $value) {
-                if (/*strpos($name, 'form_') === 0 || */strpos($name, 'error_') === 0) {
-                    setcookie($name, '', time() - 3600, '/');
-                }
-            }
-    
-            header('Location: index.php?success=1&id='.$applicationId);
-            exit();
-        } catch (PDOException $e) {
-        header('Location: index.php');
-        exit();
-        }
+            include('form.php');
             <meta http-equiv="refresh" content="4; URL=/be/lab4/">
         <?php endif; ?>
         <?php if (isset($_COOKIE['error_db'])): ?>
