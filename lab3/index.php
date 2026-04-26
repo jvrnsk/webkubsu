@@ -187,6 +187,7 @@ button:hover {
             <div class="success-message">
                 Спасибо за заполнение формы!
             </div>
+        <meta http-equiv="refresh" content="4; URL=/be/lab4/">
 
         <?php endif; ?>
 
