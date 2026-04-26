@@ -4,11 +4,96 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Форма анкеты</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+body {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 10px;
+    background-color: #f398c3;
+    color: #c93b6b;
+}
+
+h1 {
+    text-align: center;
+}
+
+.success-message{
+    color: white;
+    font: 16pt bold;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #606d42;
+    border: none;
+    border-radius: 4px;
+    text-align: center;
+}
+
+form{
+    background-color: #f8f8e0;
+    padding: 10px;
+    border-radius: 4px;
+height: 100%;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="email"],
+input[type="date"],
+textarea,
+select {
+margin-top: 5px;
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #9eb370;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+textarea {
+    height: 100px;
+}
+
+.radio-group, .checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 5px 0;
+}
+
+.error {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 5px;
+}
+
+button {
+    background-color: #9eb370;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #606d42;
+}
+</style>
 </head>
 <body>
-    <h1>Анкета</h1>
     <form action="process.php" method="POST">
+    <h1>Анкета</h1>
         <div class="form-group">
             <label for="fio">ФИО:</label>
             <input type="text" id="fio" name="fio" required>
@@ -102,7 +187,7 @@
             <div class="success-message">
                 Спасибо за заполнение формы!
             </div>
-            <meta http-equiv="refresh" content="4; URL=/BE/BE3/">
+
         <?php endif; ?>
 
     </form>
