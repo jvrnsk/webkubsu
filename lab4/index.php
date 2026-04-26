@@ -262,10 +262,9 @@ button:hover {
     background-color: #606d42;
 }
 </style>
-<body>
-    <h1>Анкета</h1>
-    
+<body>    
     <form action="index.php" method="POST">
+        <h1>Анкета</h1>
         <!-- ФИО -->
         <div class="form-group">
             <label for="fio">ФИО:</label>
