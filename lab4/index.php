@@ -372,7 +372,6 @@ button:hover {
 
         <?php if (isset($_GET['success'])): ?>
             <div class="success-message">Спасибо за заполнение анкеты!</div>
-            <meta http-equiv="refresh" content="4; URL=/be/lab4/">
         <?php endif; ?>
         <?php if (isset($_COOKIE['error_db'])): ?>
             <div class="error"><?= htmlspecialchars($_COOKIE['error_db']) ?></div>
