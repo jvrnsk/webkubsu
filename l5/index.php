@@ -1,5 +1,3 @@
-echo "VERSION 777";
-exit;
 <?php
 header('Content-Type: text/html; charset=UTF-8');
 //начало сессии
