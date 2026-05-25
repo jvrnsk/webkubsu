@@ -33,8 +33,18 @@ if (isset($_POST['login_submit'])) {
         $userData = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($userData && password_verify($_POST['password'], $userData['password_hash'])) {
-
             $_SESSION['user_id'] = $userData['id'];
+
+            $_SESSION['login_success'] = 1; // 👈 добавили флаг
+
+            header('Location: index.php');
+            exit();
+
+        } else {
+            setcookie('login_error', 'Неверный логин или пароль', 0, '/');
+            header('Location: index.php');
+            exit();
+        }
 
             // Заполняем cookies данными из БД
             setFormCookie('fio', $userData['fio']);
@@ -405,6 +415,13 @@ button:hover {
         </div>
     <?php endif; ?>
 </form>
+
+<?php if (isset($_SESSION['login_success'])): ?>
+    <div class="success">
+        Вход выполнен успешно!
+    </div>
+    <?php unset($_SESSION['login_success']); ?>
+<?php endif; ?>
 
 
 <!-- ФОРМА АНКЕТЫ -->
