@@ -239,32 +239,32 @@ function generatePassword($length = 8) {
         $applicationId = $db->lastInsertId();
     }
 
-    // Сохранение языков
-    $stmt = $db->prepare("
-        INSERT INTO application_languages (application_id, language_id)
-        SELECT ?, id FROM programming_languages WHERE name = ?
-    ");
+// Сохранение языков
+$stmt = $db->prepare("
+    INSERT INTO application_languages (application_id, language_id)
+    SELECT ?, id FROM programming_languages WHERE name = ?
+");
 
-    foreach ($_POST['languages'] as $lang) {
-        $stmt->execute([$applicationId, $lang]);
-    }
+foreach ($_POST['languages'] as $lang) {
+    $stmt->execute([$applicationId, $lang]);
+}
 
-        $db->commit();
+$db->commit();
 
-        if (!$isEdit) {
+if (!$isEdit) {
     $_SESSION['generated_login'] = $generatedLogin;
     $_SESSION['generated_password'] = $generatedPassword;
 }
 
-        // Очищаем cookies с данными формы и ошибками
-        foreach ($_COOKIE as $name => $value) {
-            if (/*strpos($name, 'form_') === 0 || */strpos($name, 'error_') === 0) {
-                setcookie($name, '', time() - 3600, '/');
-            }
-        }
+// очистка cookies ошибок
+foreach ($_COOKIE as $name => $value) {
+    if (strpos($name, 'error_') === 0) {
+        setcookie($name, '', time() - 3600, '/');
+    }
+}
 
-        header('Location: index.php?success=1&id='.$applicationId);
-        exit();
+header('Location: index.php?success=1&id='.$applicationId);
+exit();
     } catch (PDOException $e) {
         if (isset($db)) {
             $db->rollBack();
