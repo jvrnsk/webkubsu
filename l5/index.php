@@ -53,11 +53,8 @@ if (isset($_POST['login_submit'])) {
         die($e->getMessage());
     }
 }
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && !isset($_POST['login_submit'])) {
-    // обработка анкеты
-}
 // Обработка POST-запроса (отправка формы)
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && !isset($_POST['login_submit'])) {
     $errors = [];
     $allowedLanguages = ['Pascal', 'C', 'C++', 'JavaScript', 'PHP', 'Python', 'Java', 'Haskel', 'Clojure', 'Prolog', 'Scala', 'Go'];
 
@@ -373,7 +370,6 @@ button:hover {
 }
 </style>
 <body>
-<body>
 
 <!-- ФОРМА ВХОДА -->
 <form method="POST" style="margin-bottom:20px;">
@@ -394,7 +390,7 @@ button:hover {
 </form>
 
 <?php if (isset($_SESSION['login_success'])): ?>
-    <div class="success">
+    <div class="success-message">
         Вход выполнен успешно!
     </div>
     <?php unset($_SESSION['login_success']); ?>
