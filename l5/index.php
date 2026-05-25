@@ -33,51 +33,28 @@ if (isset($_POST['login_submit'])) {
         $userData = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($userData && password_verify($_POST['password'], $userData['password_hash'])) {
+
             $_SESSION['user_id'] = $userData['id'];
 
-            $_SESSION['login_success'] = 1; // 👈 добавили флаг
+            // флаг успешного входа
+            $_SESSION['login_success'] = 1;
 
             header('Location: index.php');
             exit();
 
         } else {
+
             setcookie('login_error', 'Неверный логин или пароль', 0, '/');
             header('Location: index.php');
             exit();
         }
 
-            // Заполняем cookies данными из БД
-            setFormCookie('fio', $userData['fio']);
-            setFormCookie('phone', $userData['phone']);
-            setFormCookie('email', $userData['email']);
-            setFormCookie('birthdate', $userData['birthdate']);
-            setFormCookie('gender', $userData['gender']);
-            setFormCookie('bio', $userData['bio']);
-            setFormCookie('contract', $userData['contract_agreed']);
-
-            // языки
-            $stmt2 = $db->prepare("
-                SELECT pl.name
-                FROM application_languages al
-                JOIN programming_languages pl ON pl.id = al.language_id
-                WHERE al.application_id = ?
-            ");
-            $stmt2->execute([$userData['id']]);
-
-            $langs = $stmt2->fetchAll(PDO::FETCH_COLUMN);
-
-            setFormCookie('languages', implode(',', $langs));
-
-            header('Location: index.php');
-            exit();
-
-        } else {
-            setcookie('login_error', 'Неверный логин или пароль', 0, '/');
-        }
-
-    } catch(PDOException $e) {
+    } catch (PDOException $e) {
         die($e->getMessage());
     }
+}
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && !isset($_POST['login_submit'])) {
+    // обработка анкеты
 }
 // Обработка POST-запроса (отправка формы)
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
